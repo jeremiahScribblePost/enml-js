@@ -131,7 +131,7 @@
         return str.length < 2 ? "0" + str : str;  }).join("");
 
       resource_map[hex] = resource;
-    })
+    });
 
     var writer = new XMLWriter();
     var parser = new SaxParser(function(cb) {
@@ -177,7 +177,9 @@
 
           var resource = resource_map[hash];
           
-          if(!resource) return;
+          if(!resource) {
+            return;
+          }
           var resourceTitle = resource.title || '';
           
           if(type.match('image')) {
@@ -208,7 +210,11 @@
             linkTitle = resourceTitle;
           }
           
-          if(resource.data.body) {
+          if (resource.data.url) {
+             console.log('resource has  data.url ');
+             writer.writeAttribute('src', resource.data.url);
+          } else if(resource.data.body) {
+            console.log('resource has no data.url but has data.body');
             var b64encoded = base64ArrayBuffer(resource.data.body);
             var src = 'data:'+type+';base64,'+b64encoded;
             writer.writeAttribute('src', src)
