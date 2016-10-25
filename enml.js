@@ -211,12 +211,12 @@
           }
           
           if (resource.data.url) {
-             console.log('resource has  data.url ');
-             writer.writeAttribute('src', resource.data.url);
-          } else if(resource.data.body) {
-            console.log('resource has no data.url but has data.body');
+            //console.log('resource has  data.url ');
+            writer.writeAttribute('src', resource.data.url);
+          } else if (resource.data.body) {
+            //console.log('resource has no data.url but has data.body');
             var b64encoded = base64ArrayBuffer(resource.data.body);
-            var src = 'data:'+type+';base64,'+b64encoded;
+            var src = 'data:' + type + ';base64,' + b64encoded;
             writer.writeAttribute('src', src)
           }
 
